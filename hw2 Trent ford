@@ -1,0 +1,379 @@
+my_info = {
+    "name": "Trent",
+    "age": 20,
+    "major": "Computer Science"
+}
+
+print(my_info)
+
+menu = {
+    "burger": 8.99,
+    "pizza": 12.99,
+    "fries": 3.49,
+    "soda": 1.99
+}
+
+print(menu)
+
+course_credits = {
+    "CS1350": 3,
+    "MATH201": 3,
+    "ENGL101": 3,
+    "HIST110": 3
+}
+
+print(course_credits)
+
+weekly_temps = dict(
+    Monday=75,
+    Tuesday=78,
+    Wednesday=80,
+    Thursday=77,
+    Friday=79,
+    Saturday=82,
+    Sunday=81
+)
+
+print(weekly_temps)
+
+pet = {"name": "Buddy", "type": "dog", "age": 3}
+
+print(pet["name"])
+print(pet["age"])
+
+grades = {
+    "Alice": 85,
+    "Bob": 62,
+    "Carol": 45
+}
+
+grade = grades.get("Bob", 0)
+
+if grade >= 60:
+    print("Student passed")
+else:
+    print("Student did not pass")
+
+  products = {
+    "laptop": 999.99,
+    "mouse": 29.99,
+    "keyboard": 79.99
+}
+
+product_name = "laptop"
+
+price = products.get(product_name)
+
+if price is not None:
+    print(f"{product_name}: ${price}")
+else:
+    print("Product not available")
+
+  product_name = "phone"
+
+price = products.get(product_name)
+
+if price is not None:
+    print(f"{product_name}: ${price}")
+else:
+    print("Product not available")
+
+  inventory = {}
+
+inventory["apples"] = 10
+inventory["bananas"] = 15
+inventory["oranges"] = 8
+
+print(inventory)
+
+scores = {
+    "Team A": 45,
+    "Team B": 38
+}
+
+scores["Team B"] = 52
+scores["Team C"] = 41
+
+print(scores)
+
+scores = {
+    "Team A": 45,
+    "Team B": 52,
+    "Team C": 41
+}
+
+removed = scores.pop("Team A")
+
+print("Team A's score:", removed)
+print(scores)
+
+cart = {}
+
+# Add 3 items
+cart["shirt"] = 25.00
+cart["shoes"] = 60.00
+cart["hat"] = 20.00
+
+print("Original cart:", cart)
+
+# Update the price of one item
+cart["shirt"] = 30.00
+
+# Remove one item
+removed = cart.pop("hat")
+
+print("Removed item:", removed)
+print("Final cart:", cart)
+
+# Calculate total
+total = sum(cart.values())
+
+print("Total price:", total)
+final 90.0
+
+# Create
+my_dict = {"name": "Trent"}
+
+# Access
+my_dict["name"]
+
+# Safe access
+my_dict.get("name")
+
+# Safe access with default
+my_dict.get("age", 0)
+
+# Add
+my_dict["major"] = "Computer Science"
+
+# Update
+my_dict["name"] = "Trent Ford"
+
+# Delete
+del my_dict["name"]
+
+# Remove and get the value
+my_dict.pop("major")
+
+lecture 2
+
+# a
+"student_name"  # valid - strings can be dictionary keys
+
+# b
+[1, 2, 3]  # invalid - lists are mutable
+
+# c
+100  # valid - integers can be dictionary keys
+
+# d
+("x", "y")  # valid - tuples can be dictionary keys
+
+# e
+{"a": 1}  # invalid - dictionaries are mutable
+
+# f
+frozenset({1, 2})  # valid - frozensets are immutable
+
+locations = {
+    (40.7, -74.0): "New York",
+    (34.0, -118.2): "Los Angeles"
+}
+
+print(locations)
+
+data = {"a": 1, "b": 2, "a": 3, "b": 4}
+
+print(data)
+print(len(data))
+
+Output {'a': 3, 'b': 4}
+2
+name = "Trent"
+
+print(hash(name))
+print(hash(100))
+
+high_scores = {
+    ("Alice", "Chess"): 1500,
+    ("Bob", "Chess"): 1650,
+    ("Carol", "Tetris"): 2200
+}
+
+print(high_scores[("Bob", "Chess")])
+Output 1650
+
+temps = {
+    "Monday": 72,
+    "Tuesday": 75,
+    "Wednesday": 68
+}
+
+print(temps.keys())
+print(temps.values())
+print(len(temps))
+
+print("Highest:", max(temps.values()))
+print("Lowest:", min(temps.values()))
+
+if "Friday" in temps:
+    print("Friday is in the dictionary")
+else:
+    print("Friday is not in the dictionary")
+
+temps.setdefault("Thursday", 70)
+
+print(temps)
+keys_view = temps.keys()
+
+print("Before:", keys_view)
+
+temps["Friday"] = 80
+
+print("After:", keys_view)
+
+prices = {
+    "laptop": 999,
+    "phone": 699,
+    "tablet": 449,
+    "watch": 299
+}
+
+total = sum(prices.values())
+average = total / len(prices)
+
+print("Total:", total)
+print("Average:", average)
+
+most_expensive = max(prices.items(), key=lambda x: x[1])
+least_expensive = min(prices.items(), key=lambda x: x[1])
+
+print("Most expensive:", most_expensive)
+print("Least expensive:", least_expensive)
+
+import sys
+
+keys_view = prices.keys()
+keys_list = list(prices.keys())
+
+print("View size:", sys.getsizeof(keys_view))
+print("List size:", sys.getsizeof(keys_list))
+
+prices.update({
+    "camera": 599,
+    "headphones": 149,
+    "keyboard": 89
+})
+
+print(prices)
+
+colors = {
+    "apple": "red",
+    "banana": "yellow",
+    "grape": "purple"
+}
+
+for fruit, color in colors.items():
+    print(f"The {fruit} is {color}")
+Output The apple is red
+The banana is yellow
+The grape is purple
+
+list color items returns[("apple", "red"), ("banana", "yellow"), ("grape", "purple")]
+
+  prices = {
+    "coffee": 4.50,
+    "tea": 3.00,
+    "juice": 5.25
+}
+
+for item, price in prices.items():
+    tax = price * 0.10
+    total = price + tax
+    print(f"{item}: ${price:.2f} + tax = ${total:.2f}")
+
+count = 0
+  
+for item, price in prices.items():
+    if price > 4.00:
+        count += 1
+
+print("Items over $4:", count)
+
+  x = 10
+y = 20
+
+x, y = y, x
+
+print(x)
+print(y)
+
+numbers = [1, 2, 3, 4, 5]
+
+first, *middle, last = numbers
+
+print("First:", first)
+print("Middle:", middle)
+print("Last:", last)
+
+Output First: 1
+Middle: [2, 3, 4]
+Last: 5
+
+scores = {
+    "Alice": 88,
+    "Bob": 65,
+    "Carol": 92,
+    "Dave": 71,
+    "Eve": 58
+}
+
+best_name, best_score = max(scores.items(), key=lambda x: x[1])
+
+print("Highest:", best_name, best_score)
+
+  passed = {}
+failed = {}
+
+for name, grade in scores.items():
+    if grade >= 70:
+        passed[name] = grade
+    else:
+        failed[name] = grade
+
+print("Passed:", passed)
+print("Failed:", failed)
+
+  average = sum(scores.values()) / len(scores)
+
+deviations = {}
+
+for name, grade in scores.items():
+    deviations[name] = grade - average
+
+print("Average:", average)
+print("Deviations:", deviations)
+
+  import time
+
+big_dict = {i: i * 2 for i in range(50000)}
+
+start = time.time()
+
+for key, value in big_dict.items():
+    _ = key + value
+
+items_time = time.time() - start
+
+start = time.time()
+
+for key in big_dict.keys():
+    value = big_dict[key]
+    _ = key + value
+
+keys_time = time.time() - start
+
+print(f"items(): {items_time:.4f}s")
+print(f"keys() + lookup: {keys_time:.4f}s")
+print(f"items() is {keys_time/items_time:.1f}x faster")
+  
