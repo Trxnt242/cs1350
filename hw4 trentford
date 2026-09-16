@@ -1,0 +1,651 @@
+print
+
+# -------------------------
+# Beginner
+# -------------------------
+inventory = {
+    "apples": 50,
+    "bananas": 30,
+    "oranges": 25
+}
+
+n.
+print("\n3.1 Beginner 1:")
+for product in inventory:
+    print(product)
+
+
+print("\n3.1 Beginner 2:")
+total_items = sum(inventory.values())
+print("Total items:", total_items)
+
+
+print("\n3.1 Beginner 3:")
+for product, quantity in inventory.items():
+    print(f"{product}: {quantity}")
+
+
+# -------------------------
+# Intermediate
+# -------------------------
+prices = {
+    "laptop": 999,
+    "phone": 699,
+    "tablet": 449,
+    "watch": 299
+}
+
+
+print("\n3.1 Intermediate 1:")
+for product in sorted(prices):
+    print(f"{product}: ${prices[product]}")
+
+
+print("\n3.1 Intermediate 2:")
+for product in sorted(prices, key=prices.get):
+    print(f"{product}: ${prices[product]}")
+
+
+print("\n3.1 Intermediate 3:")
+most_expensive = max(prices.items(), key=lambda item: item[1])
+print(f"Most expensive: {most_expensive[0]}: ${most_expensive[1]}")
+
+
+# -------------------------
+# Advanced
+# -------------------------
+temps = {
+    "Mon": 72,
+    "Tue": 68,
+    "Wed": 75,
+    "Thu": 80,
+    "Fri": 65
+}
+
+
+print("\n3.1 Advanced 1:")
+average_temp = sum(temps.values()) / len(temps)
+print(f"Average temperature: {average_temp:.1f}")
+
+
+print("\n3.1 Advanced 2:")
+hottest_day = None
+hottest_temp = None
+coldest_day = None
+coldest_temp = None
+
+for day, temp in temps.items():
+    if hottest_temp is None or temp > hottest_temp:
+        hottest_temp = temp
+        hottest_day = day
+
+    if coldest_temp is None or temp < coldest_temp:
+        coldest_temp = temp
+        coldest_day = day
+
+print(f"Hottest: {hottest_day} - {hottest_temp}")
+print(f"Coldest: {coldest_day} - {coldest_temp}")
+
+
+print("\n3.1 Advanced 3:")
+above_average = 0
+
+for temp in temps.values():
+    if temp > average_temp:
+        above_average += 1
+
+print("Days above average:", above_average)
+
+
+
+print
+# -------------------------
+# Beginner
+# -------------------------
+products = {
+    "laptop": {
+        "price": 999,
+        "stock": 15
+    },
+    "phone": {
+        "price": 699,
+        "stock": 50
+    }
+}
+
+
+print("\n3.2 Beginner 1:")
+print(products["laptop"]["price"])
+
+print("\n3.2 Beginner 2:")
+for product, info in products.items():
+    print(f"{product}: {info['stock']} in stock")
+
+
+# -------------------------
+# Intermediate
+# -------------------------
+
+
+print("\n3.2 Intermediate 1:")
+countries = ["USA", "Canada", "Mexico"]
+capitals = ["Washington", "Ottawa", "Mexico City"]
+
+country_capitals = {}
+
+for country, capital in zip(countries, capitals):
+    country_capitals[country] = capital
+
+print(country_capitals)
+
+
+print("\n3.2 Intermediate 2:")
+products["tablet"] = {
+    "price": 449,
+    "stock": 30
+}
+print(products)
+
+
+print("\n3.2 Intermediate 3:")
+for product, info in list(products.items()):
+    if info["stock"] < 20:
+        del products[product]
+
+print(products)
+
+
+# -------------------------
+# Advanced
+# -------------------------
+company = {
+    "Engineering": {
+        "Alice": 95000,
+        "Bob": 85000
+    },
+    "Marketing": {
+        "Carol": 75000,
+        "Dave": 70000
+    }
+}
+
+
+print("\n3.2 Advanced 1:")
+for department, employees in company.items():
+    print(f"\n{department}:")
+    for employee, salary in employees.items():
+        print(f"{employee}: ${salary}")
+
+
+print("\n3.2 Advanced 2:")
+for department, employees in company.items():
+    average_salary = sum(employees.values()) / len(employees)
+    print(f"{department}: ${average_salary:.2f}")
+
+
+print("\n3.2 Advanced 3:")
+highest_employee = None
+highest_salary = 0
+
+for department, employees in company.items():
+    for employee, salary in employees.items():
+        if salary > highest_salary:
+            highest_salary = salary
+            highest_employee = employee
+
+print(f"Highest-paid employee: {highest_employee}")
+print(f"Salary: ${highest_salary}")
+
+
+
+print
+# -------------------------
+# Beginner
+# -------------------------
+
+
+print("\n3.3 Beginner 1:")
+cubes = {x: x ** 3 for x in range(1, 6)}
+print(cubes)
+
+
+print("\n3.3 Beginner 2:")
+temps_f = {
+    "Mon": 72,
+    "Tue": 68,
+    "Wed": 75
+}
+
+temps_c = {
+    day: (temp - 32) * 5 / 9
+    for day, temp in temps_f.items()
+}
+
+print(temps_c)
+
+
+# -------------------------
+# Intermediate
+# -------------------------
+scores = {
+    "Alice": 88,
+    "Bob": 65,
+    "Carol": 92,
+    "Dave": 71,
+    "Eve": 58
+}
+
+
+print("\n3.3 Intermediate 1:")
+passing = {
+    name: score
+    for name, score in scores.items()
+    if score >= 70
+}
+
+print(passing)
+
+
+print("\n3.3 Intermediate 2:")
+
+def to_letter(score):
+    if score >= 90:
+        return "A"
+    if score >= 80:
+        return "B"
+    if score >= 70:
+        return "C"
+    return "F"
+
+letter_grades = {
+    name: to_letter(score)
+    for name, score in scores.items()
+}
+
+print(letter_grades)
+
+
+print("\n3.3 Intermediate 3:")
+student_ids = {
+    "Alice": 101,
+    "Bob": 102
+}
+
+id_lookup = {
+    student_id: name
+    for name, student_id in student_ids.items()
+}
+
+print(id_lookup)
+
+
+# -------------------------
+# Advanced
+# -------------------------
+sales = [
+    ("North", "Alice", 5000),
+    ("South", "Bob", 4500),
+    ("North", "Carol", 6000),
+    ("South", "Alice", 3500)
+]
+
+
+print("\n3.3 Advanced 1:")
+region_totals = {}
+
+for region, person, amount in sales:
+    region_totals[region] = region_totals.get(region, 0) + amount
+
+print(region_totals)
+
+print("\n3.3 Advanced 2:")
+person_totals = {}
+
+for region, person, amount in sales:
+    person_totals[person] = person_totals.get(person, 0) + amount
+
+print(person_totals)
+
+print("\n3.3 Advanced 3:")
+nested_sales = {}
+
+for region, person, amount in sales:
+    if region not in nested_sales:
+        nested_sales[region] = {}
+
+    nested_sales[region][person] = (
+        nested_sales[region].get(person, 0) + amount
+    )
+
+print(nested_sales)
+
+
+print("\nKeys starting with a:")
+print(a_only)
+
+# Count pattern
+words = [
+    "apple",
+    "banana",
+    "apple",
+    "cherry",
+    "apple"
+]
+
+counts = {}
+
+for word in words:
+    counts[word] = counts.get(word, 0) + 1
+
+print("\nWord counts:")
+print(counts)
+
+print("\n===== END OF PRACTICE =====")
+
+
+print("===== UNIT 1: SET BASICS =====")
+
+# -------------------------
+# Beginner
+# -------------------------
+
+vowels = {"a", "e", "i", "o", "u"}
+print("\n1. Vowels:", vowels)
+
+
+numbers = {1, 2, 2, 3, 3, 3, 4, 4, 4, 4}
+print("2. Unique numbers:", numbers)
+print("Number of elements:", len(numbers))
+
+
+empty = {}
+print("3. {} is actually:", type(empty))
+empty_set = set()
+print("Correct empty set:", type(empty_set))
+
+
+# -------------------------
+# Intermediate
+# -------------------------
+
+
+text = "mississippi"
+unique_letters = set(text)
+print("\n4. Unique letters in mississippi:", unique_letters)
+print("Number of unique letters:", len(unique_letters))
+
+
+emails = [
+    "a@b.com",
+    "c@d.com",
+    "a@b.com",
+    "e@f.com",
+    "c@d.com"
+]
+
+unique_emails = list(set(emails))
+print("\n5. Unique emails:", unique_emails)
+
+
+# Lists are mutable and therefore unhashable.
+print("6. A set cannot contain lists because lists are unhashable.")
+
+
+# -------------------------
+# Advanced
+# -------------------------
+
+
+print("\n7. Membership comparison:")
+
+big_set = set(range(1000000))
+big_list = list(range(1000000))
+
+print("999999 in set:", 999999 in big_set)
+print("999999 in list:", 999999 in big_list)
+print("Sets provide average O(1) membership testing; lists are O(n).")
+
+
+my_frozenset = frozenset(["a", "b"])
+frozen_dictionary = {
+    my_frozenset: "value"
+}
+
+print("\n8. Frozenset dictionary:", frozen_dictionary)
+
+
+edges = [
+    (1, 2),
+    (2, 3),
+    (1, 3),
+    (3, 4)
+]
+
+nodes = set()
+
+for edge in edges:
+    nodes.update(edge)
+
+print("\n9. Unique graph nodes:", nodes)
+
+
+
+print
+
+# -------------------------
+# Beginner
+# -------------------------
+
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+# 1. Union
+print("\n1. Union:", a | b)
+
+# 2. Intersection
+print("2. Intersection:", a & b)
+
+# 3. Difference
+print("3. Numbers only in a:", a - b)
+
+
+# -------------------------
+# Intermediate
+# -------------------------
+
+morning_shift = {"Alice", "Bob", "Carol"}
+evening_shift = {"Carol", "Dave", "Eve"}
+weekend_shift = {"Alice", "Eve", "Frank"}
+
+# 1. Employees who work all shifts.
+all_shifts = morning_shift & evening_shift & weekend_shift
+print("\n4. Employees working ALL shifts:", all_shifts)
+
+# 2. Employees who work at least one shift.
+any_shift = morning_shift | evening_shift | weekend_shift
+print("5. Employees working at least one shift:", any_shift)
+
+# 3. Employees who only work morning.
+morning_only = (
+    morning_shift
+    - evening_shift
+    - weekend_shift
+)
+print("6. Morning only:", morning_only)
+
+# 4. Employees who work exactly one shift.
+exactly_one = (
+    morning_shift
+    ^ evening_shift
+    ^ weekend_shift
+)
+
+# The chained ^ gives odd membership across the three sets.
+# Use a count to accurately find exactly one shift.
+all_employees = morning_shift | evening_shift | weekend_shift
+exactly_one_count = set()
+
+for employee in all_employees:
+    shift_count = 0
+
+    if employee in morning_shift:
+        shift_count += 1
+    if employee in evening_shift:
+        shift_count += 1
+    if employee in weekend_shift:
+        shift_count += 1
+
+    if shift_count == 1:
+        exactly_one_count.add(employee)
+
+print("7. Exactly one shift:", exactly_one_count)
+
+
+# -------------------------
+# Advanced
+# -------------------------
+
+prereqs_met = {"Alice", "Bob", "Carol", "Dave"}
+has_space = {"Bob", "Carol", "Eve", "Frank"}
+paid_tuition = {"Alice", "Carol", "Eve"}
+
+# 1. Eligible students: all three criteria.
+eligible = prereqs_met & has_space & paid_tuition
+print("\n8. Eligible to enroll:", eligible)
+
+# 2. Met prerequisites but have not paid tuition.
+prereqs_not_paid = prereqs_met - paid_tuition
+print("9. Prereqs met but tuition not paid:", prereqs_not_paid)
+
+# 3. Students missing at least one criterion.
+all_students = prereqs_met | has_space | paid_tuition
+missing_criteria = all_students - eligible
+print("10. Missing at least one criterion:", missing_criteria)
+
+
+
+print
+
+# -------------------------
+# Beginner
+# -------------------------
+
+# 1. Create {1, 2, 3}, add 4, remove 1.
+my_set = {1, 2, 3}
+my_set.add(4)
+my_set.remove(1)
+
+print("\n1. After add/remove:", my_set)
+
+# 2. Set comprehension for even numbers from 0-20.
+evens = {
+    x
+    for x in range(21)
+    if x % 2 == 0
+}
+
+print("2. Even numbers:", evens)
+
+# 3. discard() vs remove().
+test_set = {1, 2, 3}
+
+test_set.discard(99)
+print("3. discard(99) completed without an error.")
+
+# remove() would raise KeyError if the item did not exist.
+print("remove() raises KeyError when the item is missing.")
+
+
+# -------------------------
+# Intermediate
+# -------------------------
+
+# 1. Remove duplicates while preserving order.
+data = [4, 5, 2, 4, 8, 5, 2, 1, 9, 4]
+
+seen = set()
+ordered_unique = []
+
+for item in data:
+    if item not in seen:
+        seen.add(item)
+        ordered_unique.append(item)
+
+print("\n4. Unique values preserving order:", ordered_unique)
+
+# 2. Unique lowercase words.
+sentence = "To be or not to be that is the question"
+
+unique_words = {
+    word.lower()
+    for word in sentence.split()
+}
+
+print("5. Unique words:", unique_words)
+
+# 3. Find missing numbers.
+expected = set(range(1, 11))
+actual = {1, 2, 4, 5, 7, 8, 10}
+
+missing_numbers = expected - actual
+
+print("6. Missing numbers:", missing_numbers)
+
+
+# -------------------------
+# Advanced
+# -------------------------
+
+# 1. Function that returns duplicate elements.
+def find_duplicates(lst):
+    seen = set()
+    duplicates = set()
+
+    for item in lst:
+        if item in seen:
+            duplicates.add(item)
+        else:
+            seen.add(item)
+
+    return duplicates
+
+
+duplicate_result = find_duplicates(
+    [1, 2, 2, 3, 3, 3, 4]
+)
+
+print("\n7. Duplicates:", duplicate_result)
+
+
+# 2. Employee skills.
+alice = {"Python", "SQL", "Excel", "Tableau"}
+bob = {"Python", "Java", "SQL", "AWS"}
+carol = {"Python", "R", "SQL", "Tableau"}
+
+# Skills all three employees have.
+common_skills = alice & bob & carol
+
+# Skills only Alice has.
+alice_only = alice - bob - carol
+
+# All unique skills across the team.
+all_skills = alice | bob | carol
+
+print("8. Skills everyone has:", common_skills)
+print("Skills only Alice has:", alice_only)
+print("All unique skills:", all_skills)
+
+
+# 3. Function that finds common characters.
+def common_chars(string1, string2):
+    set1 = set(string1)
+    set2 = set(string2)
+
+    return set1 & set2
+
+
+common_result = common_chars("hello", "world")
+
+print("9. Common characters:", common_result)
+
+
