@@ -1,4 +1,4 @@
-Problem 1
+Problem 1 Course Gradebook 
 
 class Gradebook:
     def __init__(self):
@@ -28,7 +28,9 @@ class Gradebook:
     def missing(self, assignment):
         return sorted(name for name, s in self.grades.items() if assignment not in s)
 
-Problem 2
+
+
+Problem 2 Access Control with sets 
 
 class Door:
     def __init__(self, name):
@@ -77,11 +79,13 @@ def audit(doors):
         print(f"{door.name}: {len(door.authorized_cards)} cards")
     print(f"Master cards: {master_cards(doors)}")
 
-Problem 3
+
+
+Problem 3: Sensor log Processor
 
 
 def process_readings(in_file, json_file, alert_file, limit):
-    stats = {}   # sensor_id: [count, total, max]
+    stats = {}   
     alerts = []
 
     with open(in_file, "r") as f:
@@ -115,7 +119,7 @@ def process_readings(in_file, json_file, alert_file, limit):
 
     return len(alerts)
 
-Problem 4
+Problem 4: Shipping Rates with inheritance 
 
 
 class Shipment(ABC):
@@ -164,11 +168,13 @@ class InternationalShipment(Shipment):
     def cost(self):
         return self.weight_kg * 5.00 * (1 + self.customs_pct)
 
-Problem 5
+
+
+Problem 5: Polynomical Class with Operator Overloading
 
 class Polynomial:
     def __init__(self, coeffs):
-        self.coeffs = list(coeffs)  # store a copy
+        self.coeffs = list(coeffs)  
 
     def __str__(self):
         terms = []
