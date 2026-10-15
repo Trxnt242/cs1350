@@ -1,0 +1,216 @@
+Problem 1
+
+class Gradebook:
+    def __init__(self):
+        self.grades = {}  # {student: {assignment: score}}
+
+    def add_score(self, student, assignment, score):
+        if student not in self.grades:
+            self.grades[student] = {}
+        self.grades[student][assignment] = score  # overwrites if it exists
+
+    def student_average(self, student):
+        scores = self.grades.get(student)
+        if not scores:  # student missing or has no scores
+            return None
+        return sum(scores.values()) / len(scores)
+
+    def assignment_average(self, assignment):
+        scores = [s[assignment] for s in self.grades.values() if assignment in s]
+        if not scores:
+            return None
+        return sum(scores) / len(scores)
+
+    def top_students(self, n):
+        ranked = sorted(self.grades, key=self.student_average, reverse=True)
+        return ranked[:n]
+
+    def missing(self, assignment):
+        return sorted(name for name, s in self.grades.items() if assignment not in s)
+
+Problem 2
+
+class Door:
+    def __init__(self, name):
+        self.name = name
+        self.authorized_cards = set()
+
+    def grant(self, card_id):
+        self.authorized_cards.add(card_id)
+
+    def revoke(self, card_id):
+        self.authorized_cards.discard(card_id)
+
+    def can_open(self, card_id):
+        return card_id in self.authorized_cards
+
+
+def master_cards(doors):
+    if not doors:
+        return set()
+    common_cards = set(doors[0].authorized_cards)
+    for door in doors[1:]:
+        common_cards.intersection_update(door.authorized_cards)
+    return common_cards
+
+
+def single_door_cards(doors):
+    card_counts = {}
+    for door in doors:
+        for card_id in door.authorized_cards:
+            card_counts[card_id] = card_counts.get(card_id, 0) + 1
+    return {
+        card_id for card_id, count in card_counts.items()
+        if count == 1
+    }
+
+
+def unused_cards(all_cards, doors):
+    used_cards = set()
+    for door in doors:
+        used_cards.update(door.authorized_cards)
+    return set(all_cards) - used_cards
+
+
+def audit(doors):
+    for door in doors:
+        print(f"{door.name}: {len(door.authorized_cards)} cards")
+    print(f"Master cards: {master_cards(doors)}")
+
+Problem 3
+
+
+def process_readings(in_file, json_file, alert_file, limit):
+    stats = {}   # sensor_id: [count, total, max]
+    alerts = []
+
+    with open(in_file, "r") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            timestamp, sensor_id, raw_value = line.split(",")
+            value = float(raw_value)
+
+            if sensor_id not in stats:
+                stats[sensor_id] = [0, 0.0, value]
+            s = stats[sensor_id]
+            s[0] += 1
+            s[1] += value
+            s[2] = max(s[2], value)
+
+            if value > limit:
+                alerts.append(f"{timestamp} {sensor_id} {raw_value}")
+
+    summary = {
+        sid: {"count": n, "average": total / n, "max": mx}
+        for sid, (n, total, mx) in stats.items()
+    }
+    with open(json_file, "w") as f:
+        json.dump(summary, f, indent=2)
+
+    with open(alert_file, "w") as f:
+        for a in alerts:
+            f.write(a + "\n")
+
+    return len(alerts)
+
+Problem 4
+
+
+class Shipment(ABC):
+    def __init__(self, tracking_id, weight_kg):
+        Shipment.validate_weight(weight_kg)
+        self.tracking_id = tracking_id
+        self.weight_kg = weight_kg
+
+    @abstractmethod
+    def cost(self):
+        pass
+
+    def label(self):
+        return f"{self.tracking_id} ({self.weight_kg} kg): ${self.cost():.2f}"
+
+    @staticmethod
+    def validate_weight(weight_kg):
+        if weight_kg <= 0:
+            raise ValueError("Weight must be greater than 0")
+
+
+class StandardShipment(Shipment):
+    def __init__(self, tracking_id, weight_kg, rate_per_kg=2.00):
+        super().__init__(tracking_id, weight_kg)
+        self.rate_per_kg = rate_per_kg
+
+    def cost(self):
+        return self.weight_kg * self.rate_per_kg
+
+
+class ExpressShipment(StandardShipment):
+    def __init__(self, tracking_id, weight_kg, rate_per_kg=2.00, surcharge=10.00):
+        super().__init__(tracking_id, weight_kg, rate_per_kg)
+        self.surcharge = surcharge
+
+    def cost(self):
+        return super().cost() + self.surcharge
+
+
+class InternationalShipment(Shipment):
+    def __init__(self, tracking_id, weight_kg, country, customs_pct=0.15):
+        super().__init__(tracking_id, weight_kg)
+        self.country = country
+        self.customs_pct = customs_pct
+
+    def cost(self):
+        return self.weight_kg * 5.00 * (1 + self.customs_pct)
+
+Problem 5
+
+class Polynomial:
+    def __init__(self, coeffs):
+        self.coeffs = list(coeffs)  # store a copy
+
+    def __str__(self):
+        terms = []
+        for i in range(len(self.coeffs) - 1, -1, -1):
+            c = self.coeffs[i]
+            if c == 0:
+                continue
+            if i == 0:
+                terms.append(str(c))
+            else:
+                coef = "" if c == 1 else str(c)
+                power = "x" if i == 1 else f"x^{i}"
+                terms.append(coef + power)
+        return " + ".join(terms)
+
+    def __repr__(self):
+        return f"Polynomial({self.coeffs})"
+
+    def __len__(self):
+        return len(self.coeffs)
+
+    def __getitem__(self, i):
+        return self.coeffs[i] if i < len(self.coeffs) else 0
+
+    def __call__(self, x):
+        return sum(c * x**i for i, c in enumerate(self.coeffs))
+
+    def __add__(self, other):
+        n = max(len(self), len(other))
+        return Polynomial([self[i] + other[i] for i in range(n)])
+
+    def __mul__(self, k):
+        return Polynomial([c * k for c in self.coeffs])
+
+    def degree(self):
+        for i in range(len(self.coeffs) - 1, -1, -1):
+            if self.coeffs[i] != 0:
+                return i
+        return 0
+
+    def __eq__(self, other):
+        return self.degree() == other.degree()
+
+    def __lt__(self, other):
+        return self.degree() < other.degree()           
