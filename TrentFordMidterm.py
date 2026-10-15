@@ -2,16 +2,16 @@ Problem 1 Course Gradebook
 
 class Gradebook:
     def __init__(self):
-        self.grades = {}  # {student: {assignment: score}}
+        self.grades = {}  
 
     def add_score(self, student, assignment, score):
         if student not in self.grades:
             self.grades[student] = {}
-        self.grades[student][assignment] = score  # overwrites if it exists
+        self.grades[student][assignment] = score  
 
     def student_average(self, student):
         scores = self.grades.get(student)
-        if not scores:  # student missing or has no scores
+        if not scores:  
             return None
         return sum(scores.values()) / len(scores)
 
